@@ -24,7 +24,7 @@ ZEROEXPIRYTIME="00000000"
 echo "plaintext" > secret.dat
 
 # Create the signing authority
-openssl genrsa -out private.pem 2048
+openssl genrsa -rand /dev/urandom -out private.pem 2048
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 # Load the verification key and Create the policysigned policy
 tpm2_loadexternal -C o -G rsa -u public.pem -c signing_key.ctx

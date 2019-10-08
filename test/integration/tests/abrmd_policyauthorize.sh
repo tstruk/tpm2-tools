@@ -41,7 +41,7 @@ generate_policy_authorize () {
     rm $file_session_file
 }
 
-openssl genrsa -out $file_private_key 2048 2>/dev/null
+openssl genrsa -rand /dev/urandom -out $file_private_key 2048 2>/dev/null
 openssl rsa -in $file_private_key -out $file_public_key -pubout 2>/dev/null
 tpm2_loadexternal -G rsa -C n -u $file_public_key -c $file_verifying_key_ctx \
 -n $file_verifying_key_name
